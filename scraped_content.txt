@@ -1,0 +1,12 @@
+============================================================
+KARYONZ PLAY SCHOOL, SINGAMPUNARI - SCRAPED CONTENT
+============================================================
+
+--- JUSTDIAL ---
+Justdial: page returned but looked like a CAPTCHA/blocked page, no usable data.
+
+
+--- NOTES ---
+Google Maps and Facebook do not serve usable data to plain requests+BeautifulSoup scrapers (both require a logged-in, JS-executing browser and actively block automated clients). For those two sources, pull the details manually:
+  Facebook: https://www.facebook.com/people/Karyonz-School/100063749422618/
+  Google Maps: search 'Karyonz Play School Singampunari'

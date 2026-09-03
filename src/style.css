@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Baloo 2", ui-sans-serif, system-ui, sans-serif;
+
+  /* Soft, modern kindergarten palette: deep indigo ink with gold, pink,
+     sky and lime accents on a warm cream ground. */
+  --color-ink-50: #f4f4fb;
+  --color-ink-100: #e6e5f5;
+  --color-ink-200: #c9c7e8;
+  --color-ink-300: #9a96cf;
+  --color-ink-400: #6b66b0;
+  --color-ink-500: #4a4490;
+  --color-ink-600: #332d75;
+  --color-ink-700: #2a2465;
+  --color-ink-800: #221e5b;
+  --color-ink-900: #191545;
+
+  --color-sunny-100: #fdf3e0;
+  --color-sunny-200: #fce4b4;
+  --color-sunny-300: #fbc96b;
+  --color-sunny-400: #f5a623;
+  --color-sunny-500: #e2941a;
+
+  --color-sky-100: #e8f5fd;
+  --color-sky-200: #d6ecfa;
+  --color-sky-300: #8ed4f5;
+  --color-sky-400: #4fc3f7;
+  --color-sky-600: #2196c9;
+
+  --color-pink-100: #fdeaf1;
+  --color-pink-200: #f9d5e8;
+  --color-pink-300: #f4a6c8;
+  --color-pink-400: #ee6fa8;
+  --color-pink-500: #e04d8f;
+
+  --color-coral-100: #fde5e5;
+  --color-coral-300: #f59a9a;
+  --color-coral-400: #ef5350;
+  --color-coral-500: #e03e3b;
+
+  --color-lime-100: #f2f7d5;
+  --color-lime-300: #d6e56b;
+  --color-lime-400: #b9cf2e;
+  --color-lime-500: #9bb022;
+
+  --color-cream: #fdf5ee;
+
+  --font-script: "Yellowtail", cursive;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink-900);
+  background-color: #ffffff;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes blob-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+.animate-blob {
+  animation: blob-pulse 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-blob {
+    animation: none;
+  }
+}
+
+/* ---- Soft modern kindergarten design language ------------------------------
+   Script accent labels, organic blob photo masks, floating outline rings and
+   pastel rounded icon tiles. All drawn with CSS - no external art assets. */
+
+/* Gold handwritten label that sits above each section heading. */
+.script-label {
+  font-family: var(--font-script);
+  color: var(--color-sunny-400);
+  font-size: 1.65rem;
+  line-height: 1.2;
+}
+
+/* Big friendly sentence-case section heading. */
+.display-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Organic blob mask for photos. */
+.blob-mask {
+  border-radius: 58% 42% 47% 53% / 46% 52% 48% 54%;
+  overflow: hidden;
+}
+.blob-mask-alt {
+  border-radius: 44% 56% 60% 40% / 55% 44% 56% 45%;
+  overflow: hidden;
+}
+
+/* Floating decorative outline ring. */
+.deco-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border-style: solid;
+  pointer-events: none;
+}
+
+/* Pastel rounded-square icon tile. */
+.tile-icon {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 1.15rem;
+  transition: transform 0.3s ease;
+}
+.tile-icon:hover {
+  transform: translateY(-5px);
+}
+
+/* Half-circle age badge that sits on the bottom edge of a photo. */
+.age-dome {
+  border-radius: 9999px 9999px 0 0;
+}
