@@ -43,11 +43,11 @@ onMounted(() => {
       <img
         src="/assets/logo.jpg"
         alt="Karyonz School"
-        class="w-20 h-20 mx-auto rounded-full shadow-xl animate-pulse-scale"
+        class="w-20 h-20 mx-auto shadow-xl animate-pulse-scale"
       />
       <p class="font-heading font-bold text-white text-lg mt-4 tracking-wide">Karyonz School</p>
-      <div class="mt-4 w-32 h-1 mx-auto bg-white/10 rounded-full overflow-hidden">
-        <div class="h-full w-1/2 bg-sunny-400 rounded-full animate-loader-bar"></div>
+      <div class="mt-4 w-32 h-1 mx-auto bg-white/10 overflow-hidden">
+        <div class="h-full w-1/2 bg-sun-400 animate-loader-bar"></div>
       </div>
     </div>
   </div>

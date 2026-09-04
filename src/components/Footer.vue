@@ -5,15 +5,15 @@ const year = new Date().getFullYear()
 
 <template>
   <footer class="relative overflow-hidden bg-ink-900 text-ink-100">
-    <span class="pointer-events-none absolute -top-40 -left-32 w-[30rem] h-[30rem] rounded-full border-[5rem] border-white/[0.04]"></span>
-    <span class="pointer-events-none absolute -bottom-56 right-0 w-[34rem] h-[34rem] rounded-full border-[6rem] border-white/[0.03]"></span>
-    <span class="pointer-events-none absolute top-16 right-1/4 w-16 h-16 rounded-full border-4 border-sunny-400/25"></span>
-    <span class="pointer-events-none absolute bottom-24 left-1/3 w-8 h-8 rounded-full border-4 border-pink-400/25"></span>
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background: radial-gradient(40rem 26rem at 8% -20%, rgba(212, 162, 60, 0.14), transparent 62%)"
+    ></div>
 
-    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-14 grid sm:grid-cols-3 gap-8">
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-12 grid sm:grid-cols-3 gap-8">
       <div>
         <div class="flex items-center gap-2">
-          <img src="/assets/logo.jpg" alt="Karyonz School logo" class="w-9 h-9 rounded-full object-cover" />
+          <img src="/assets/logo.jpg" alt="Karyonz School logo" class="w-9 h-9 object-cover" />
           <span class="font-heading font-bold text-white text-lg">Karyonz</span>
         </div>
         <p class="text-sm mt-3 text-ink-300">{{ school.tagline }}</p>
@@ -21,7 +21,7 @@ const year = new Date().getFullYear()
           :href="school.facebook"
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center gap-2 mt-4 text-sm font-medium text-sky-300 hover:text-sky-200"
+          class="inline-flex items-center gap-2 mt-4 text-sm font-medium text-aqua-300 hover:text-aqua-200"
         >
           Follow us on Facebook →
         </a>

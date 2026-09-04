@@ -2,34 +2,33 @@
 import { pillars } from '../data/school.js'
 
 const tiles = [
-  'bg-sunny-200 text-sunny-500',
-  'bg-pink-200 text-pink-500',
-  'bg-sky-200 text-sky-600',
+  'bg-sun-100 text-sun-600',
+  'bg-coral-100 text-coral-600',
+  'bg-aqua-100 text-aqua-700',
 ]
 </script>
 
 <template>
-  <section id="about" class="relative overflow-hidden py-20 scroll-mt-20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-14 items-center">
-      <!-- blob photo with floating rings -->
-      <div v-reveal class="relative">
-        <div class="blob-mask-alt aspect-square shadow-2xl">
+  <section id="about" class="relative overflow-hidden py-16 scroll-mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
+      <!-- framed photo, matching the hero's treatment -->
+      <div v-reveal:right class="relative w-full max-w-md mx-auto md:max-w-none">
+        <div
+          class="relative overflow-hidden aspect-[4/5] sm:aspect-square ring-1 ring-ink-100"
+        >
           <img
             src="/assets/classroom_play.jpg"
             alt="Karyonz School classroom activity"
+            loading="lazy"
             class="w-full h-full object-cover"
           />
         </div>
-        <span class="deco-ring w-20 h-20 border-8 border-ink-400 -left-4 top-1/2 animate-float"></span>
-        <span class="deco-ring w-28 h-28 border-[11px] border-sunny-400 left-14 -bottom-6 animate-float" style="animation-delay: 1.2s"></span>
-        <span class="deco-ring w-9 h-9 border-4 border-pink-400 left-2 bottom-24"></span>
-        <span class="deco-ring w-4 h-4 bg-coral-400 border-0 right-1/4 -top-1"></span>
       </div>
 
       <div>
-        <div v-reveal>
+        <div v-reveal:left>
           <p class="script-label">Who we are</p>
-          <h2 class="display-heading text-ink-800 text-3xl sm:text-4xl leading-tight mt-1">
+          <h2 v-text-animate class="display-heading text-ink-800 text-3xl sm:text-4xl leading-tight mt-1">
             A safe, joyful start<br class="hidden sm:block" />
             for your child
           </h2>
@@ -40,7 +39,7 @@ const tiles = [
           </p>
         </div>
 
-        <div class="mt-10 grid sm:grid-cols-2 gap-x-8 gap-y-9">
+        <div class="mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-8">
           <div v-for="(p, i) in pillars" :key="p.title" v-reveal="i">
             <div :class="['tile-icon w-16 text-3xl', tiles[i % tiles.length]]">{{ p.icon }}</div>
             <h3 class="display-heading text-ink-800 text-lg mt-4">{{ p.title }}</h3>

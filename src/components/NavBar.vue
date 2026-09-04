@@ -1,8 +1,14 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import ActionButton from './ui/ActionButton.vue'
 
 const open = ref(false)
 const scrolled = ref(false)
+
+// The bar floats transparently over the full-screen hero photo and only takes
+// on its white background once you've scrolled past it — or once the mobile
+// menu is open, so the dropdown panel isn't left hanging off a clear header.
+const solid = computed(() => scrolled.value || open.value)
 
 const links = [
   { label: 'Home', href: '#top' },
@@ -22,7 +28,7 @@ function onKeydown(e) {
 }
 
 function onScroll() {
-  scrolled.value = window.scrollY > 8
+  scrolled.value = window.scrollY > 80
 }
 
 onMounted(() => {
@@ -37,33 +43,45 @@ onUnmounted(() => {
 
 <template>
   <header
-    class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b transition-shadow duration-300"
-    :class="scrolled ? 'border-ink-100 shadow-md' : 'border-transparent shadow-none'"
+    class="fixed top-0 inset-x-0 z-50 border-b transition-colors duration-300"
+    :class="solid ? 'bg-white/95 backdrop-blur border-ink-100 shadow-md' : 'bg-transparent border-transparent'"
   >
     <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
       <a href="#top" class="flex items-center gap-2" @click="closeMenu">
-        <img src="/assets/logo.jpg" alt="Karyonz School logo" class="w-10 h-10 rounded-full object-cover shadow-sm" />
-        <span class="font-heading font-bold text-ink-700 text-lg leading-tight">
+        <img src="/assets/logo.jpg" alt="Karyonz School logo" class="w-10 h-10 object-cover shadow-sm" />
+        <span class="font-heading font-bold text-lg leading-tight transition-colors" :class="solid ? 'text-ink-700' : 'text-white'">
           Karyonz
-          <span class="block text-xs font-sans font-medium text-ink-400 -mt-0.5">Play &amp; CBSE School</span>
+          <span
+            class="block text-xs font-sans font-medium -mt-0.5 transition-colors"
+            :class="solid ? 'text-ink-400' : 'text-white/75'"
+          >
+            Play &amp; CBSE School
+          </span>
         </span>
       </a>
 
-      <ul class="hidden md:flex items-center gap-8 font-medium text-ink-700">
+      <ul
+        class="hidden md:flex items-center gap-8 font-medium transition-colors"
+        :class="solid ? 'text-ink-700' : 'text-white'"
+      >
         <li v-for="link in links" :key="link.href">
-          <a :href="link.href" class="hover:text-sky-400 transition-colors">{{ link.label }}</a>
+          <a
+            :href="link.href"
+            class="transition-colors"
+            :class="solid ? 'hover:text-coral-500' : 'hover:text-coral-300'"
+          >
+            {{ link.label }}
+          </a>
         </li>
       </ul>
 
-      <a
-        href="#contact"
-        class="hidden md:inline-flex items-center gap-2 rounded-full bg-sunny-400 hover:bg-sunny-500 text-white font-bold px-6 py-3 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
-      >
+      <ActionButton href="#contact" class="hidden md:inline-flex !px-6 !py-2.5">
         Enroll Now
-      </a>
+      </ActionButton>
 
       <button
-        class="md:hidden grid place-items-center w-11 h-11 rounded-lg text-ink-700 hover:bg-ink-50"
+        class="md:hidden grid place-items-center w-11 h-11 transition-colors"
+        :class="solid ? 'text-ink-700 hover:bg-ink-50' : 'text-white hover:bg-white/15'"
         :aria-label="open ? 'Close menu' : 'Open menu'"
 
         :aria-expanded="open"
@@ -85,13 +103,9 @@ onUnmounted(() => {
             <a :href="link.href" class="block py-2.5" @click="closeMenu">{{ link.label }}</a>
           </li>
           <li class="pt-2">
-            <a
-              href="#contact"
-              class="inline-flex w-full justify-center items-center gap-2 rounded-full bg-sunny-400 text-ink-900 font-semibold px-5 py-2.5"
-              @click="closeMenu"
-            >
+            <ActionButton href="#contact" block class="!py-3" @click="closeMenu">
               Enroll Now
-            </a>
+            </ActionButton>
           </li>
         </ul>
       </div>

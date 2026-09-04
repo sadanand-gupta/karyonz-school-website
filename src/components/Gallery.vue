@@ -11,10 +11,10 @@ function onError(src) {
 }
 
 const gradients = [
-  'from-sky-300 to-sky-100',
-  'from-sunny-300 to-sunny-100',
-  'from-ink-400 to-sky-200',
-  'from-sunny-400 to-sky-200',
+  'from-aqua-300 to-aqua-100',
+  'from-sun-300 to-sun-100',
+  'from-ink-400 to-aqua-200',
+  'from-sun-400 to-aqua-200',
 ]
 
 // The marquee only runs from `sm` up. On phones the strip is a plain
@@ -56,11 +56,11 @@ function resume() {
 </script>
 
 <template>
-  <section id="gallery" class="py-20 scroll-mt-20 overflow-hidden">
+  <section id="gallery" class="py-16 scroll-mt-16 overflow-hidden">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div v-reveal class="text-center max-w-2xl mx-auto">
         <p class="script-label">Gallery</p>
-        <h2 class="display-heading text-ink-800 text-3xl sm:text-4xl mt-1">Our activities</h2>
+        <h2 v-text-animate class="display-heading text-ink-800 text-3xl sm:text-4xl mt-1">Our activities</h2>
         <p class="mt-4 text-ink-400">
           Real moments from our classrooms, activities, and celebrations at Karyonz.
         </p>
@@ -68,7 +68,7 @@ function resume() {
     </div>
 
     <div
-      class="gallery-fade mt-12 overflow-x-auto sm:overflow-visible [scrollbar-width:none] snap-x snap-mandatory sm:snap-none"
+      class="gallery-fade mt-10 overflow-x-auto sm:overflow-visible [scrollbar-width:none] snap-x snap-mandatory sm:snap-none"
       @mouseenter="pause"
       @mouseleave="resume"
     >
@@ -76,7 +76,7 @@ function resume() {
         <figure
           v-for="(img, i) in slides"
           :key="`${img.src}-${i}`"
-          class="relative w-72 sm:w-80 aspect-4/3 shrink-0 snap-center rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-shadow group"
+          class="relative w-72 sm:w-80 aspect-4/3 shrink-0 snap-center overflow-hidden group"
         >
           <img
             v-if="!failed[img.src]"

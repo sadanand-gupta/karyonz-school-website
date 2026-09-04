@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { school, programs } from '../data/school.js'
+import ActionButton from './ui/ActionButton.vue'
 
 const form = reactive({ name: '', childAge: '', phone: '', batch: '', message: '' })
 const showModal = ref(false)
@@ -26,11 +27,11 @@ function closeModal() {
 </script>
 
 <template>
-  <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 py-20 scroll-mt-20">
+  <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 scroll-mt-16">
     <div class="grid lg:grid-cols-2 gap-10 items-start">
       <div v-reveal>
         <p class="script-label">Admission Desk</p>
-        <h2 class="display-heading text-ink-800 text-3xl sm:text-4xl mt-1">
+        <h2 v-text-animate class="display-heading text-ink-800 text-3xl sm:text-4xl mt-1">
           Let's talk about your child's first school
         </h2>
         <p class="mt-4 text-ink-600 max-w-lg">
@@ -39,30 +40,30 @@ function closeModal() {
 
         <ul class="mt-8 space-y-5">
           <li class="flex items-start gap-4">
-            <span class="w-11 h-11 shrink-0 grid place-items-center rounded-xl bg-sunny-100 text-xl">📍</span>
+            <span class="w-11 h-11 shrink-0 grid place-items-center bg-sun-100 text-xl">📍</span>
             <div>
               <p class="font-semibold text-ink-800">Address</p>
               <p class="text-ink-600 text-sm">{{ school.address }}</p>
             </div>
           </li>
           <li class="flex items-start gap-4">
-            <span class="w-11 h-11 shrink-0 grid place-items-center rounded-xl bg-sky-100 text-xl">📞</span>
+            <span class="w-11 h-11 shrink-0 grid place-items-center bg-aqua-100 text-xl">📞</span>
             <div>
               <p class="font-semibold text-ink-800">Phone</p>
-              <a :href="school.phoneHref" class="text-ink-600 text-sm hover:text-sky-400">{{ school.phone }}</a>
+              <a :href="school.phoneHref" class="text-ink-600 text-sm hover:text-aqua-600">{{ school.phone }}</a>
               <span class="text-ink-300 text-sm"> / </span>
-              <a :href="school.phoneAltHref" class="text-ink-600 text-sm hover:text-sky-400">{{ school.phoneAlt }}</a>
+              <a :href="school.phoneAltHref" class="text-ink-600 text-sm hover:text-aqua-600">{{ school.phoneAlt }}</a>
             </div>
           </li>
           <li class="flex items-start gap-4">
-            <span class="w-11 h-11 shrink-0 grid place-items-center rounded-xl bg-sunny-100 text-xl">✉️</span>
+            <span class="w-11 h-11 shrink-0 grid place-items-center bg-sun-100 text-xl">✉️</span>
             <div>
               <p class="font-semibold text-ink-800">Email</p>
-              <a :href="`mailto:${school.email}`" class="text-ink-600 text-sm hover:text-sky-400">{{ school.email }}</a>
+              <a :href="`mailto:${school.email}`" class="text-ink-600 text-sm hover:text-aqua-600">{{ school.email }}</a>
             </div>
           </li>
           <li class="flex items-start gap-4">
-            <span class="w-11 h-11 shrink-0 grid place-items-center rounded-xl bg-sky-100 text-xl">🕐</span>
+            <span class="w-11 h-11 shrink-0 grid place-items-center bg-aqua-100 text-xl">🕐</span>
             <div>
               <p class="font-semibold text-ink-800">Hours</p>
               <p class="text-ink-600 text-sm">{{ school.hours }}</p>
@@ -70,7 +71,7 @@ function closeModal() {
           </li>
         </ul>
 
-        <div class="mt-8 rounded-2xl overflow-hidden border border-ink-100 shadow-sm h-56">
+        <div class="mt-8 overflow-hidden h-56">
           <iframe
             title="Karyonz School location map"
             class="w-full h-full"
@@ -82,8 +83,8 @@ function closeModal() {
       </div>
 
       <form
-        v-reveal="1"
-        class="bg-ink-50 border border-ink-100 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow"
+        v-reveal:left="1"
+        class="border-t-2 border-ink-900 pt-8"
         @submit.prevent="handleSubmit"
       >
         <div class="space-y-4">
@@ -96,7 +97,7 @@ function closeModal() {
                 type="text"
                 required
                 placeholder="Your full name"
-                class="w-full rounded-xl border border-ink-100 bg-white px-4 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
               />
             </div>
             <div>
@@ -107,7 +108,7 @@ function closeModal() {
                 type="text"
                 required
                 placeholder="e.g. 3 years"
-                class="w-full rounded-xl border border-ink-100 bg-white px-4 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
               />
             </div>
           </div>
@@ -120,7 +121,7 @@ function closeModal() {
               type="tel"
               required
               placeholder="+91 XXXXX XXXXX"
-              class="w-full rounded-xl border border-ink-100 bg-white px-4 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-sky-400"
+              class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
             />
           </div>
 
@@ -130,7 +131,7 @@ function closeModal() {
               id="batch"
               v-model="form.batch"
               required
-              class="w-full rounded-xl border border-ink-100 bg-white px-4 py-2.5 text-ink-800 focus:outline-none focus:ring-2 focus:ring-sky-400"
+              class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 focus:outline-none focus:border-coral-500 transition-colors"
             >
               <option value="" disabled>Choose a batch</option>
               <option v-for="p in programs" :key="p.name" :value="p.name">{{ p.name }} ({{ p.ageGroup }})</option>
@@ -145,16 +146,11 @@ function closeModal() {
               rows="4"
               required
               placeholder="Tell us anything else we should know..."
-              class="w-full rounded-xl border border-ink-100 bg-white px-4 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-sky-400 resize-none"
+              class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors resize-none"
             ></textarea>
           </div>
 
-          <button
-            type="submit"
-            class="w-full rounded-full bg-sunny-400 hover:bg-sunny-500 text-white font-bold px-6 py-4 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
-          >
-            Send Enquiry
-          </button>
+          <ActionButton type="submit" block>Send Enquiry</ActionButton>
         </div>
       </form>
     </div>
@@ -166,12 +162,12 @@ function closeModal() {
         class="fixed inset-0 z-50 grid place-items-center bg-ink-900/60 backdrop-blur-sm px-4"
         @click.self="closeModal"
       >
-        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-sunny-100 grid place-items-center text-4xl">🎉</div>
+        <div class="bg-white shadow-2xl max-w-sm w-full p-8 text-center">
+          <div class="w-16 h-16 mx-auto bg-sun-100 grid place-items-center text-4xl">🎉</div>
           <h3 class="font-heading font-bold text-ink-800 text-xl mt-4">Thank you!</h3>
           <p class="text-ink-600 text-sm mt-2">We will contact you shortly.</p>
           <button
-            class="mt-6 w-full rounded-full bg-ink-700 hover:bg-ink-800 text-white font-semibold px-6 py-2.5 transition-colors"
+            class="mt-6 w-full bg-ink-700 hover:bg-ink-800 text-white font-semibold px-6 py-2.5 transition-colors"
             @click="closeModal"
           >
             Close

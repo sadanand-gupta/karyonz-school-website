@@ -4,50 +4,59 @@
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Baloo 2", ui-sans-serif, system-ui, sans-serif;
 
-  /* Soft, modern kindergarten palette: deep indigo ink with gold, pink,
-     sky and lime accents on a warm cream ground. */
-  --color-ink-50: #f4f4fb;
-  --color-ink-100: #e6e5f5;
-  --color-ink-200: #c9c7e8;
-  --color-ink-300: #9a96cf;
-  --color-ink-400: #6b66b0;
-  --color-ink-500: #4a4490;
-  --color-ink-600: #332d75;
-  --color-ink-700: #2a2465;
-  --color-ink-800: #221e5b;
-  --color-ink-900: #191545;
+  /* ---- Playful, but disciplined ----------------------------------------------
+     A play-school palette that stays clean by limiting itself: a warm near-black
+     for all type, a warm paper ground, and three bright accents used sparingly.
+       ink    - warm charcoal neutrals. Every piece of body copy and heading
+       coral  - the action colour. The ONLY colour a button is ever painted
+       sun    - warm yellow. Highlights, the script label, the rating star
+       aqua   - fresh teal. The single cool note, for structure and links
+     Every text pair here is verified against WCAG AA in the contrast check. */
+  --color-ink-50: #f7f6f4;
+  --color-ink-100: #ebe8e3;
+  --color-ink-200: #d8d3cb;
+  --color-ink-300: #a9a196;
+  --color-ink-400: #6b6358;
+  --color-ink-500: #524b42;
+  --color-ink-600: #3c362f;
+  --color-ink-700: #2c2721;
+  --color-ink-800: #201c17;
+  --color-ink-900: #16130f;
 
-  --color-sunny-100: #fdf3e0;
-  --color-sunny-200: #fce4b4;
-  --color-sunny-300: #fbc96b;
-  --color-sunny-400: #f5a623;
-  --color-sunny-500: #e2941a;
+  --color-coral-100: #ffeae4;
+  --color-coral-200: #ffd0c3;
+  --color-coral-300: #ff9c82;
+  --color-coral-400: #f4674a;
+  --color-coral-500: #cf3d20;
+  --color-coral-600: #b3351b;
 
-  --color-sky-100: #e8f5fd;
-  --color-sky-200: #d6ecfa;
-  --color-sky-300: #8ed4f5;
-  --color-sky-400: #4fc3f7;
-  --color-sky-600: #2196c9;
+  --color-sun-100: #fff4d9;
+  --color-sun-200: #ffe4a3;
+  --color-sun-300: #ffcf5c;
+  --color-sun-400: #f7b32b;
+  --color-sun-500: #c98a12;
+  --color-sun-600: #96660b;
 
-  --color-pink-100: #fdeaf1;
-  --color-pink-200: #f9d5e8;
-  --color-pink-300: #f4a6c8;
-  --color-pink-400: #ee6fa8;
-  --color-pink-500: #e04d8f;
+  --color-aqua-100: #dff3f0;
+  --color-aqua-200: #b9e5df;
+  --color-aqua-300: #6cc9bd;
+  --color-aqua-400: #2ba899;
+  --color-aqua-500: #1e8578;
+  --color-aqua-600: #16665c;
 
-  --color-coral-100: #fde5e5;
-  --color-coral-300: #f59a9a;
-  --color-coral-400: #ef5350;
-  --color-coral-500: #e03e3b;
-
-  --color-lime-100: #f2f7d5;
-  --color-lime-300: #d6e56b;
-  --color-lime-400: #b9cf2e;
-  --color-lime-500: #9bb022;
-
-  --color-cream: #fdf5ee;
+  --color-cream: #fbf9f5;
 
   --font-script: "Yellowtail", cursive;
+
+  /* Square everything. `rounded-*` utilities all resolve to these. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -66,51 +75,27 @@ body {
   font-family: var(--font-heading);
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-@keyframes blob-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.12);
-    opacity: 1;
-  }
-}
-.animate-blob {
-  animation: blob-pulse 9s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-float,
-  .animate-blob {
+  .animate-ping {
     animation: none;
   }
 }
 
-/* ---- Soft modern kindergarten design language ------------------------------
-   Script accent labels, organic blob photo masks, floating outline rings and
-   pastel rounded icon tiles. All drawn with CSS - no external art assets. */
+/* ---- Design language --------------------------------------------------------
+   Square corners throughout, hairline rules instead of boxes, and colour used
+   only where it carries meaning. */
 
-/* Gold handwritten label that sits above each section heading. */
+/* Handwritten label that sits above each section heading. */
 .script-label {
   font-family: var(--font-script);
-  color: var(--color-sunny-400);
+  color: var(--color-sun-600);
   font-size: 1.65rem;
   line-height: 1.2;
+}
+
+/* Same label over a photo: lighter, so it holds up against the scrim. */
+.script-label-light {
+  color: var(--color-sun-300);
 }
 
 /* Big friendly sentence-case section heading. */
@@ -120,37 +105,71 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Organic blob mask for photos. */
-.blob-mask {
-  border-radius: 58% 42% 47% 53% / 46% 52% 48% 54%;
-  overflow: hidden;
-}
-.blob-mask-alt {
-  border-radius: 44% 56% 60% 40% / 55% 44% 56% 45%;
-  overflow: hidden;
-}
-
-/* Floating decorative outline ring. */
-.deco-ring {
-  position: absolute;
-  border-radius: 9999px;
-  border-style: solid;
-  pointer-events: none;
-}
-
-/* Pastel rounded-square icon tile. */
+/* Square icon tile. */
 .tile-icon {
   display: grid;
   place-items: center;
   aspect-ratio: 1;
-  border-radius: 1.15rem;
+  border-radius: 0;
   transition: transform 0.3s ease;
 }
 .tile-icon:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 
-/* Half-circle age badge that sits on the bottom edge of a photo. */
-.age-dome {
-  border-radius: 9999px 9999px 0 0;
+/* ---- Motion primitives -----------------------------------------------------
+   The CSS half of the motion work. The rest lives in components/ui/, built on
+   motion-v (the Vue build of Motion, the engine behind Magic UI). Everything
+   here is switched off under prefers-reduced-motion. */
+
+/* Word slice produced by v-text-animate — needs to be a block to transform. */
+.word-piece {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+/* Diagonal gloss that sweeps across a button. */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -70%;
+  width: 45%;
+  transform: skewX(-18deg);
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+.btn-shine:hover::after {
+  left: 130%;
+}
+/* Same sweep, running on its own so the main call to action keeps catching
+   the eye without needing a hover. */
+.btn-shine-auto::after {
+  animation: shine-sweep 5.5s ease-in-out infinite;
+}
+@keyframes shine-sweep {
+  0%,
+  62% {
+    left: -70%;
+  }
+  92%,
+  100% {
+    left: 130%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shine-auto::after {
+    animation: none;
+  }
+  .btn-shine::after {
+    transition: none;
+  }
 }

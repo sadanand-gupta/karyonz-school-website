@@ -33,7 +33,7 @@ onUnmounted(stop)
 </script>
 
 <template>
-  <section id="testimonials" class="relative overflow-hidden py-24 scroll-mt-20">
+  <section id="testimonials" class="relative overflow-hidden py-16 scroll-mt-16 bg-gradient-to-b from-white to-ink-50/70">
     <div
       v-reveal
       class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center"
@@ -43,29 +43,23 @@ onUnmounted(stop)
       @focusin="stop"
     >
       <p class="script-label">Testimonials</p>
-      <h2 class="display-heading text-ink-800 text-3xl sm:text-4xl mt-1">What parents say</h2>
-      <p class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-sunny-100 text-sunny-500 text-sm font-bold px-4 py-1.5">
-        ⭐ {{ school.rating.value }}/5 · {{ school.rating.count }} reviews on {{ school.rating.source }}
+      <h2 v-text-animate class="display-heading text-ink-800 text-3xl sm:text-4xl mt-1">What parents say</h2>
+      <p class="mt-3 text-sm font-medium text-ink-400">
+        <span class="text-sun-600">★</span>
+        {{ school.rating.value }}/5 · {{ school.rating.count }} reviews on {{ school.rating.source }}
       </p>
 
-      <!-- floating decorative rings -->
-      <span class="deco-ring -z-10 w-24 h-24 border-8 border-sunny-400 -right-16 top-0 hidden lg:block"></span>
-      <span class="deco-ring -z-10 w-16 h-16 border-[7px] border-sky-400 -left-24 top-44 hidden lg:block"></span>
-      <span class="deco-ring -z-10 w-9 h-9 border-4 border-pink-400 -right-10 bottom-20 hidden lg:block"></span>
-      <span class="deco-ring -z-10 w-7 h-7 border-4 border-coral-400 -left-12 bottom-10 hidden lg:block"></span>
-      <span class="deco-ring -z-10 w-4 h-4 bg-lime-400 border-0 -left-6 top-16 hidden lg:block"></span>
-
-      <div class="mt-12 relative min-h-[240px] sm:min-h-[200px]">
+      <div class="mt-6 relative min-h-[190px] px-0 sm:px-6 pt-8 pb-2">
         <!-- oversized quote mark sitting behind the text -->
         <span
-          class="pointer-events-none absolute inset-x-0 -top-6 text-[6rem] leading-none text-ink-100/80 select-none font-serif -z-10"
+          class="pointer-events-none absolute inset-x-0 top-0 text-[6rem] leading-none text-ink-100/80 select-none font-serif"
           aria-hidden="true"
         >
           &ldquo;
         </span>
 
         <transition name="slide" mode="out-in">
-          <blockquote :key="active" class="relative px-2">
+          <blockquote :key="active" class="relative">
             <p class="text-ink-600 text-lg sm:text-xl leading-relaxed">
               “{{ testimonials[active].quote }}”
             </p>
@@ -79,34 +73,21 @@ onUnmounted(stop)
         </transition>
       </div>
 
-      <div class="mt-8 flex items-center justify-center gap-1">
-        <button
-          aria-label="Previous testimonial"
-          class="w-11 h-11 grid place-items-center rounded-full bg-white shadow-md text-ink-700 hover:bg-sunny-400 hover:text-white transition-colors"
-          @click="select(active - 1)"
-        >
-          ‹
-        </button>
-        <!-- Dots keep their small look but sit inside a 44px-tall target. -->
+      <!-- Bare markers, no arrow buttons. It rotates on its own, and the
+           markers keep a 44px target without drawing a box around it. -->
+      <div class="mt-6 flex items-center justify-center">
         <button
           v-for="(t, i) in testimonials"
           :key="t.name"
           :aria-label="`Show testimonial ${i + 1}`"
           :aria-current="i === active"
-          class="grid place-items-center h-11 px-2"
+          class="grid place-items-center h-11 px-1.5"
           @click="select(i)"
         >
           <span
-            class="block w-2.5 h-2.5 rounded-full transition-colors"
-            :class="i === active ? 'bg-sunny-400' : 'bg-ink-200'"
+            class="block h-0.5 transition-all"
+            :class="i === active ? 'w-8 bg-coral-500' : 'w-4 bg-ink-200 hover:bg-ink-300'"
           ></span>
-        </button>
-        <button
-          aria-label="Next testimonial"
-          class="w-11 h-11 grid place-items-center rounded-full bg-white shadow-md text-ink-700 hover:bg-sunny-400 hover:text-white transition-colors"
-          @click="select(active + 1)"
-        >
-          ›
         </button>
       </div>
     </div>

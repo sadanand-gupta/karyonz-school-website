@@ -24,6 +24,6 @@ onMounted(() => {
 
 <template>
   <div class="fixed top-0 left-0 right-0 z-[60] h-1 bg-transparent">
-    <div ref="barRef" class="h-full bg-gradient-to-r from-sunny-400 to-sky-400"></div>
+    <div ref="barRef" class="h-full bg-gradient-to-r from-sun-400 to-aqua-600"></div>
   </div>
 </template>
