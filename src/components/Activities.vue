@@ -3,7 +3,7 @@ import { activities } from '../data/school.js'
 </script>
 
 <template>
-  <section class="bg-cream py-16">
+  <section class="bg-surface-base py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div v-reveal class="text-center max-w-2xl mx-auto">
         <p class="script-label">Enrichment</p>
@@ -19,9 +19,9 @@ import { activities } from '../data/school.js'
           v-for="(a, i) in activities"
           :key="a.name"
           v-reveal:scale="i"
-          class="text-center"
+          class="text-center bg-white border border-surface-line py-6 px-3"
         >
-          <div class="tile-icon w-14 mx-auto text-2xl bg-ink-50">{{ a.icon }}</div>
+          <div class="tile-icon w-14 mx-auto text-2xl bg-surface-alt">{{ a.icon }}</div>
           <p class="display-heading text-ink-800 text-sm mt-3">{{ a.name }}</p>
         </div>
       </div>

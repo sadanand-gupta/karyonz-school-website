@@ -11,7 +11,7 @@ import BlurFade from './ui/BlurFade.vue'
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <!-- The one dark band on the page, so the numbers land. No card, no
            shadow — a flat block of colour edge to edge. -->
-      <div class="relative bg-ink-900 px-6 sm:px-10 py-12">
+      <div class="relative bg-surface-deep px-6 sm:px-10 py-12">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-10 divide-white/10 lg:divide-x">
           <BlurFade
             v-for="(s, i) in stats"

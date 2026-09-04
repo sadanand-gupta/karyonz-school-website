@@ -5,7 +5,7 @@ const titles = ['Safe play spaces', 'Hygienic campus', 'Celebrations', 'Expert t
 </script>
 
 <template>
-  <section id="facilities" class="relative overflow-hidden py-16 scroll-mt-16">
+  <section id="facilities" class="relative overflow-hidden py-16 scroll-mt-16 bg-surface-base">
     <div
       class="pointer-events-none absolute inset-0"
       style="background: radial-gradient(42rem 28rem at -6% 110%, rgba(53, 80, 127, 0.10), transparent 62%)"
@@ -24,8 +24,13 @@ const titles = ['Safe play spaces', 'Hygienic campus', 'Celebrations', 'Expert t
       </div>
 
       <div class="grid sm:grid-cols-2 gap-x-8 gap-y-10">
-        <div v-for="(f, i) in facilities" :key="f.text" v-reveal:left="i" class="flex items-start gap-5">
-          <div class="tile-icon w-14 shrink-0 display-heading text-lg bg-aqua-100 text-aqua-700">
+        <div
+          v-for="(f, i) in facilities"
+          :key="f.text"
+          v-reveal:left="i"
+          class="flex items-start gap-5 bg-white border border-surface-line p-5"
+        >
+          <div class="tile-icon w-14 shrink-0 display-heading text-lg bg-aqua-100 text-aqua-600">
             {{ String(i + 1).padStart(2, '0') }}
           </div>
           <div>

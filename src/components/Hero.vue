@@ -1,4 +1,5 @@
 <script setup>
+import { asset } from '../lib/asset.js'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { gsap } from 'gsap'
 import { school } from '../data/school.js'
@@ -7,8 +8,8 @@ import ActionButton from './ui/ActionButton.vue'
 // Two full-bleed campus photos that cross-fade behind the headline.
 // Both are landscape shots that still read well when cropped tall on a phone.
 const heroSlides = [
-  { src: '/assets/hero_bg.webp', alt: "Karyonz School children at the Children's Day celebration" },
-  { src: '/assets/campus_view.jpg', alt: 'Karyonz School students in uniform by the painted campus mural' },
+  { src: asset('assets/gallery_extra_1.jpg'), alt: 'Karyonz School children during a classroom activity' },
+  { src: asset('assets/gallery_extra_2.jpg'), alt: 'Karyonz School children at play on the campus' },
 ]
 
 // Short, verifiable reassurances under the CTAs — the kind of thing a parent
@@ -57,7 +58,7 @@ onUnmounted(() => clearInterval(slideTimer))
 </script>
 
 <template>
-  <section id="top" class="relative min-h-svh flex items-center overflow-hidden bg-ink-900">
+  <section id="top" class="relative min-h-svh flex items-center overflow-hidden bg-surface-deep">
     <!-- background slides -->
     <div class="absolute inset-0">
       <img
@@ -75,8 +76,8 @@ onUnmounted(() => clearInterval(slideTimer))
     <!-- Scrim. Two layers: a left-to-right wash that keeps the copy column
          readable on desktop, and a bottom-up vignette that does the same job
          once the layout stacks on a phone. -->
-    <div class="absolute inset-0 bg-gradient-to-r from-ink-900/95 via-ink-900/78 to-ink-900/40"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-ink-900/85 via-transparent to-ink-900/50"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/15"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/25"></div>
 
     <div class="relative w-full max-w-6xl mx-auto px-5 sm:px-6 pt-24 pb-20">
       <div class="max-w-2xl">

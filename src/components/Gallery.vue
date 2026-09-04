@@ -56,12 +56,12 @@ function resume() {
 </script>
 
 <template>
-  <section id="gallery" class="py-16 scroll-mt-16 overflow-hidden">
+  <section id="gallery" class="py-16 scroll-mt-16 overflow-hidden bg-surface-deep">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div v-reveal class="text-center max-w-2xl mx-auto">
-        <p class="script-label">Gallery</p>
-        <h2 v-text-animate class="display-heading text-ink-800 text-3xl sm:text-4xl mt-1">Our activities</h2>
-        <p class="mt-4 text-ink-400">
+        <p class="script-label script-label-light">Gallery</p>
+        <h2 v-text-animate class="display-heading text-white text-3xl sm:text-4xl mt-1">Our activities</h2>
+        <p class="mt-4 text-white/60">
           Real moments from our classrooms, activities, and celebrations at Karyonz.
         </p>
       </div>

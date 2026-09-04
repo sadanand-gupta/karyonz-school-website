@@ -1,4 +1,5 @@
 <script setup>
+import { asset } from '../lib/asset.js'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import ActionButton from './ui/ActionButton.vue'
 
@@ -15,6 +16,7 @@ const links = [
   { label: 'About', href: '#about' },
   { label: 'Batches', href: '#batches' },
   { label: 'Facilities', href: '#facilities' },
+  { label: 'Videos', href: '#videos' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
 ]
@@ -44,11 +46,11 @@ onUnmounted(() => {
 <template>
   <header
     class="fixed top-0 inset-x-0 z-50 border-b transition-colors duration-300"
-    :class="solid ? 'bg-white/95 backdrop-blur border-ink-100 shadow-md' : 'bg-transparent border-transparent'"
+    :class="solid ? 'bg-white/95 backdrop-blur border-surface-line shadow-md' : 'bg-transparent border-transparent'"
   >
     <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
       <a href="#top" class="flex items-center gap-2" @click="closeMenu">
-        <img src="/assets/logo.jpg" alt="Karyonz School logo" class="w-10 h-10 object-cover shadow-sm" />
+        <img :src="asset('assets/logo.jpg')" alt="Karyonz School logo" class="w-10 h-10 rounded-full object-cover ring-1 ring-black/5" />
         <span class="font-heading font-bold text-lg leading-tight transition-colors" :class="solid ? 'text-ink-700' : 'text-white'">
           Karyonz
           <span
@@ -75,9 +77,11 @@ onUnmounted(() => {
         </li>
       </ul>
 
-      <ActionButton href="#contact" class="hidden md:inline-flex !px-6 !py-2.5">
-        Enroll Now
-      </ActionButton>
+      <!-- Wrapped rather than given `hidden` directly: ActionButton's own
+           `inline-flex` wins the cascade and the button would show on mobile. -->
+      <div class="hidden md:block">
+        <ActionButton href="#contact" class="!px-6 !py-2.5">Enroll Now</ActionButton>
+      </div>
 
       <button
         class="md:hidden grid place-items-center w-11 h-11 transition-colors"
@@ -97,7 +101,7 @@ onUnmounted(() => {
     </nav>
 
     <transition name="fade">
-      <div v-if="open" class="md:hidden border-t border-ink-100 bg-white px-4 pb-4 max-h-[70svh] overflow-y-auto">
+      <div v-if="open" class="md:hidden border-t border-surface-line bg-white px-4 pb-4 max-h-[70svh] overflow-y-auto">
         <ul class="flex flex-col gap-1 pt-2 font-medium text-ink-700">
           <li v-for="link in links" :key="link.href">
             <a :href="link.href" class="block py-2.5" @click="closeMenu">{{ link.label }}</a>

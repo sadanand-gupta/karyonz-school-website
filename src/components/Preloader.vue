@@ -1,4 +1,5 @@
 <script setup>
+import { asset } from '../lib/asset.js'
 import { onMounted, ref } from 'vue'
 import { gsap } from 'gsap'
 
@@ -41,9 +42,9 @@ onMounted(() => {
   <div v-if="show" ref="loaderRef" class="fixed inset-0 z-[100] bg-ink-800 grid place-items-center">
     <div class="text-center">
       <img
-        src="/assets/logo.jpg"
+        :src="asset('assets/logo.jpg')"
         alt="Karyonz School"
-        class="w-20 h-20 mx-auto shadow-xl animate-pulse-scale"
+        class="w-20 h-20 mx-auto rounded-full shadow-xl animate-pulse-scale"
       />
       <p class="font-heading font-bold text-white text-lg mt-4 tracking-wide">Karyonz School</p>
       <div class="mt-4 w-32 h-1 mx-auto bg-white/10 overflow-hidden">

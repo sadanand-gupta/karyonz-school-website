@@ -1,23 +1,24 @@
 <script setup>
+import { asset } from '../lib/asset.js'
 import { pillars } from '../data/school.js'
 
 const tiles = [
   'bg-sun-100 text-sun-600',
   'bg-coral-100 text-coral-600',
-  'bg-aqua-100 text-aqua-700',
+  'bg-aqua-100 text-aqua-600',
 ]
 </script>
 
 <template>
-  <section id="about" class="relative overflow-hidden py-16 scroll-mt-16">
+  <section id="about" class="relative overflow-hidden py-16 scroll-mt-16 bg-surface-base">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
       <!-- framed photo, matching the hero's treatment -->
       <div v-reveal:right class="relative w-full max-w-md mx-auto md:max-w-none">
         <div
-          class="relative overflow-hidden aspect-[4/5] sm:aspect-square ring-1 ring-ink-100"
+          class="relative overflow-hidden aspect-[4/5] sm:aspect-square ring-1 ring-surface-line"
         >
           <img
-            src="/assets/classroom_play.jpg"
+            :src="asset('assets/classroom_play.jpg')"
             alt="Karyonz School classroom activity"
             loading="lazy"
             class="w-full h-full object-cover"
@@ -40,7 +41,12 @@ const tiles = [
         </div>
 
         <div class="mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-8">
-          <div v-for="(p, i) in pillars" :key="p.title" v-reveal="i">
+          <div
+            v-for="(p, i) in pillars"
+            :key="p.title"
+            v-reveal="i"
+            class="bg-white border border-surface-line p-5"
+          >
             <div :class="['tile-icon w-16 text-3xl', tiles[i % tiles.length]]">{{ p.icon }}</div>
             <h3 class="display-heading text-ink-800 text-lg mt-4">{{ p.title }}</h3>
             <p class="text-ink-400 text-sm mt-2 leading-relaxed">{{ p.text }}</p>

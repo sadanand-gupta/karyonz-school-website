@@ -11,6 +11,7 @@
        coral  - the action colour. The ONLY colour a button is ever painted
        sun    - warm yellow. Highlights, the script label, the rating star
        aqua   - fresh teal. The single cool note, for structure and links
+       sky    - light blue. The video gallery hover rim
      Every text pair here is verified against WCAG AA in the contrast check. */
   --color-ink-50: #f7f6f4;
   --color-ink-100: #ebe8e3;
@@ -44,7 +45,32 @@
   --color-aqua-500: #1e8578;
   --color-aqua-600: #16665c;
 
+  --color-sky-100: #e4f2fd;
+  --color-sky-200: #c2e2fa;
+  --color-sky-300: #8ecbf5;
+  --color-sky-400: #4aa8e8;
+  --color-sky-500: #2481c4;
+  --color-sky-600: #17629b;
+
   --color-cream: #fbf9f5;
+
+  /* ---- Page grounds -----------------------------------------------------------
+     The page alternates between three grounds so a long scroll has rhythm rather
+     than running as one undifferentiated sheet. They are blue-tinted — enough
+     saturation to actually read as blue rather than as a dull grey, which is
+     what makes the ground look considered instead of blank, and which gives the
+     warm coral/sun accents a cool field to sit against.
+       base  - the default ground. Replaces plain #ffffff on body
+       alt   - one step deeper, for every other section
+       deep  - the dark band, roughly every third or fourth section
+       floor - the footer, a notch below deep, so the page closes
+       line  - hairline rules on the light grounds
+     White is no longer the default, which frees it to mean "card". */
+  --color-surface-base: #eef3fa;
+  --color-surface-alt: #e0e9f5;
+  --color-surface-deep: #0f1a2b;
+  --color-surface-floor: #0a121f;
+  --color-surface-line: #c9d8ea;
 
   --font-script: "Yellowtail", cursive;
 
@@ -68,7 +94,7 @@
 body {
   font-family: var(--font-sans);
   color: var(--color-ink-900);
-  background-color: #ffffff;
+  background-color: var(--color-surface-base);
 }
 
 .font-heading {

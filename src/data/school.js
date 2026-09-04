@@ -1,3 +1,4 @@
+import { asset } from '../lib/asset.js'
 // Central place for school contact/business info.
 // Sourced from the school's own details + public Facebook page tagline.
 // Swap phone/address/hours here if anything changes.
@@ -10,9 +11,17 @@ export const school = {
   phoneHref: 'tel:+919566593549',
   phoneAlt: '+91 80986 95361',
   phoneAltHref: 'tel:+918098695361',
+  // Shown publicly on the site as the school's contact address.
   email: 'karyonzschool@gmail.com',
+  // Where the enquiry form actually sends. Kept separate from `email` so the
+  // published address and the inbox that receives submissions can differ.
+  enquiryEmail: 'sadanandguptat@gmail.com',
   hours: 'Mon–Fri: 9:00 AM – 7:30 PM · Sat: 9:00 AM – 2:30 PM · Sun: 9:30 – 11:30 AM',
-  facebook: 'https://www.facebook.com/people/Karyonz-School/100063749422618/',
+  // Destination used for the map embed and the "Get Directions" link.
+  // Keep it short and unambiguous so Google resolves it to the right pin.
+  // If the pin ever lands slightly off, replace this with the exact
+  // "lat,lng" copied from Google Maps (right-click the pin -> copy coords).
+  mapsQuery: 'Karyonz Play School, Bharathi Nagar, Singampunari, Sivaganga, Tamil Nadu 630502',
   rating: { value: 4.7, count: 8, source: 'Justdial' },
 }
 
@@ -137,10 +146,51 @@ export const stats = [
 ]
 
 export const gallery = [
-  { src: '/assets/campus_view.jpg', alt: 'Karyonz School students in the school corridor', label: 'Campus Life' },
-  { src: '/assets/classroom_play.jpg', alt: 'Students in a bright, colourful classroom', label: 'Classroom Play' },
-  { src: '/assets/student_activities.jpg', alt: 'Children doing fine motor skill activities', label: 'Student Activities' },
-  { src: '/assets/learning_moments.jpg', alt: 'A student engaged in a learning activity', label: 'Learning Moments' },
-  { src: '/assets/gallery_extra_1.jpg', alt: 'Students with craft planters outside the school', label: 'Craft Activity' },
-  { src: '/assets/gallery_extra_2.jpg', alt: 'Students at the school playground', label: 'Playground Fun' },
+  { src: asset('assets/campus_view.jpg'), alt: 'Karyonz School students in the school corridor', label: 'Campus Life' },
+  { src: asset('assets/classroom_play.jpg'), alt: 'Students in a bright, colourful classroom', label: 'Classroom Play' },
+  { src: asset('assets/student_activities.jpg'), alt: 'Children doing fine motor skill activities', label: 'Student Activities' },
+  { src: asset('assets/learning_moments.jpg'), alt: 'A student engaged in a learning activity', label: 'Learning Moments' },
+  { src: asset('assets/gallery_extra_1.jpg'), alt: 'Students with craft planters outside the school', label: 'Craft Activity' },
+  { src: asset('assets/gallery_extra_2.jpg'), alt: 'Students at the school playground', label: 'Playground Fun' },
+]
+
+// Facebook reels and videos from the school's own page, embedded through
+// Facebook's official video plugin.
+//
+// Each one must be PUBLIC on Facebook or it renders as an empty box for
+// visitors. Nothing here is fetched until a visitor clicks a tile — see
+// VideoGallery.vue for why.
+//
+// `shape` is the video's TRUE aspect ratio, read off the loaded player rather
+// than assumed from the URL: a /reel/ URL is often landscape or square, and
+// guessing from the URL letterboxes it into black bars. Check a new one before
+// tagging it.
+//   'tall'   -> portrait 9:16
+//   'wide'   -> landscape 16:9
+//   'square' -> 1:1
+//
+// Videos that fail to embed ("Unavailable" / rights-blocked) are left out
+// entirely — an embed that errors is worse than one that is absent.
+//
+// `poster` is Facebook's own thumbnail for the video, saved locally: the CDN
+// URLs it comes from are signed and expire, so they cannot be linked directly.
+// Re-extract with the same trick if a video is ever replaced — load the plugin
+// with autoplay=false and read the poster <img> off the paused player.
+export const videos = [
+  { id: '744093234828358', shape: 'wide', poster: asset('assets/video-thumbs/744093234828358.jpg'),
+    url: 'https://www.facebook.com/reel/744093234828358' },
+  { id: '637148748735992', shape: 'wide', poster: asset('assets/video-thumbs/637148748735992.jpg'),
+    url: 'https://www.facebook.com/100063749422618/videos/637148748735992' },
+  { id: '1970511030042133', shape: 'wide', poster: asset('assets/video-thumbs/1970511030042133.jpg'),
+    url: 'https://www.facebook.com/reel/1970511030042133' },
+  { id: '861918712564457', shape: 'square', poster: asset('assets/video-thumbs/861918712564457.jpg'),
+    url: 'https://www.facebook.com/reel/861918712564457' },
+  { id: '351364690721018', shape: 'square', poster: asset('assets/video-thumbs/351364690721018.jpg'),
+    url: 'https://www.facebook.com/reel/351364690721018' },
+  { id: '409472215127012', shape: 'tall', poster: asset('assets/video-thumbs/409472215127012.jpg'),
+    url: 'https://www.facebook.com/reel/409472215127012' },
+  { id: '921278826666917', shape: 'square', poster: asset('assets/video-thumbs/921278826666917.jpg'),
+    url: 'https://www.facebook.com/reel/921278826666917' },
+  { id: '3628594527384469', shape: 'square', poster: asset('assets/video-thumbs/3628594527384469.jpg'),
+    url: 'https://www.facebook.com/100063749422618/videos/3628594527384469' },
 ]

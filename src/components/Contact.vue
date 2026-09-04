@@ -13,7 +13,7 @@ function handleSubmit() {
   const body = encodeURIComponent(
     `Parent Name: ${form.name}\nChild Age: ${form.childAge}\nPhone: ${form.phone}\nBatch: ${form.batch}\n\nMessage:\n${form.message}`
   )
-  window.location.href = `mailto:${school.email}?subject=${encodeURIComponent(
+  window.location.href = `mailto:${school.enquiryEmail}?subject=${encodeURIComponent(
     'Admission Enquiry - Karyonz School'
   )}&body=${body}`
 
@@ -24,11 +24,59 @@ function handleSubmit() {
 function closeModal() {
   showModal.value = false
 }
+
+// --- Map / directions -------------------------------------------------
+// The Google embed iframe cannot ask for the visitor's location (Google
+// blocks geolocation inside `output=embed`), so tapping the map hands off
+// to Google Maps directions instead. We try for real GPS coordinates first;
+// if the visitor denies the prompt or it times out we still open directions
+// without an origin, and Google fills in "Your location" itself. Either way
+// the visitor lands on a route with distance and time already drawn.
+const destination = school.mapsQuery || school.address
+const locating = ref(false)
+
+function openDirections(origin) {
+  const params = new URLSearchParams({
+    api: '1',
+    destination,
+    travelmode: 'driving',
+  })
+  if (origin) params.set('origin', origin)
+  window.open(`https://www.google.com/maps/dir/?${params}`, '_blank', 'noopener')
+}
+
+function getDirections() {
+  if (locating.value) return
+
+  if (!navigator.geolocation) {
+    openDirections()
+    return
+  }
+
+  locating.value = true
+  let settled = false
+  const go = (origin) => {
+    if (settled) return
+    settled = true
+    locating.value = false
+    openDirections(origin)
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => go(`${pos.coords.latitude},${pos.coords.longitude}`),
+    () => go(),
+    { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+  )
+
+  // Some browsers leave the permission prompt open indefinitely; don't let
+  // the button sit in a loading state forever.
+  setTimeout(() => go(), 9000)
+}
 </script>
 
 <template>
-  <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 scroll-mt-16">
-    <div class="grid lg:grid-cols-2 gap-10 items-start">
+  <section id="contact" class="bg-surface-alt px-4 sm:px-6 py-16 scroll-mt-16">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
       <div v-reveal>
         <p class="script-label">Admission Desk</p>
         <h2 v-text-animate class="display-heading text-ink-800 text-3xl sm:text-4xl mt-1">
@@ -71,20 +119,41 @@ function closeModal() {
           </li>
         </ul>
 
-        <div class="mt-8 overflow-hidden h-56">
+        <div class="mt-8 relative overflow-hidden h-56 group">
           <iframe
             title="Karyonz School location map"
-            class="w-full h-full"
+            class="w-full h-full pointer-events-none"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            :src="`https://www.google.com/maps?q=${encodeURIComponent(school.address)}&output=embed`"
+            :src="`https://www.google.com/maps?q=${encodeURIComponent(destination)}&output=embed`"
           ></iframe>
+
+          <!-- The iframe is click-through disabled above so this covers it:
+               one tap anywhere on the map starts the route from wherever
+               the visitor currently is. -->
+          <button
+            type="button"
+            :aria-label="`Get directions to ${school.name} from your current location`"
+            :disabled="locating"
+            class="absolute inset-0 w-full h-full flex items-end justify-center pb-4 bg-ink-900/0 hover:bg-ink-900/20 focus:outline-none focus-visible:bg-ink-900/20 transition-colors cursor-pointer"
+            @click="getDirections"
+          >
+            <span
+              class="inline-flex items-center gap-2 bg-white text-ink-800 text-sm font-semibold tracking-tight px-5 py-2.5 border border-surface-line group-hover:-translate-y-0.5 transition-transform duration-200"
+            >
+              <span aria-hidden="true">📍</span>
+              {{ locating ? 'Finding your location…' : 'Get Directions' }}
+            </span>
+          </button>
         </div>
+        <p class="mt-2 text-xs text-ink-500">
+          Tap the map to open Google Maps with the route from your current location.
+        </p>
       </div>
 
       <form
         v-reveal:left="1"
-        class="border-t-2 border-ink-900 pt-8"
+        class="bg-white border border-surface-line border-t-2 border-t-ink-900 p-7"
         @submit.prevent="handleSubmit"
       >
         <div class="space-y-4">
@@ -97,7 +166,7 @@ function closeModal() {
                 type="text"
                 required
                 placeholder="Your full name"
-                class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
+                class="w-full border-0 border-b border-surface-line bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
               />
             </div>
             <div>
@@ -108,7 +177,7 @@ function closeModal() {
                 type="text"
                 required
                 placeholder="e.g. 3 years"
-                class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
+                class="w-full border-0 border-b border-surface-line bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
               />
             </div>
           </div>
@@ -121,7 +190,7 @@ function closeModal() {
               type="tel"
               required
               placeholder="+91 XXXXX XXXXX"
-              class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
+              class="w-full border-0 border-b border-surface-line bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors"
             />
           </div>
 
@@ -131,7 +200,7 @@ function closeModal() {
               id="batch"
               v-model="form.batch"
               required
-              class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 focus:outline-none focus:border-coral-500 transition-colors"
+              class="w-full border-0 border-b border-surface-line bg-transparent px-0 py-2.5 text-ink-800 focus:outline-none focus:border-coral-500 transition-colors"
             >
               <option value="" disabled>Choose a batch</option>
               <option v-for="p in programs" :key="p.name" :value="p.name">{{ p.name }} ({{ p.ageGroup }})</option>
@@ -146,7 +215,7 @@ function closeModal() {
               rows="4"
               required
               placeholder="Tell us anything else we should know..."
-              class="w-full border-0 border-b border-ink-200 bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors resize-none"
+              class="w-full border-0 border-b border-surface-line bg-transparent px-0 py-2.5 text-ink-800 placeholder:text-ink-400 focus:outline-none focus:border-coral-500 transition-colors resize-none"
             ></textarea>
           </div>
 

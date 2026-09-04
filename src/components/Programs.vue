@@ -1,17 +1,18 @@
 <script setup>
+import { asset } from '../lib/asset.js'
 import { programs } from '../data/school.js'
 
 // Real campus photos paired with each batch, plus the dome badge colour.
 const cards = {
-  Playgroup: { photo: '/assets/learning_moments.jpg' },
-  Nursery: { photo: '/assets/classroom_play.jpg' },
-  LKG: { photo: '/assets/student_activities.jpg' },
-  UKG: { photo: '/assets/campus_view.jpg' },
+  Playgroup: { photo: asset('assets/learning_moments.jpg') },
+  Nursery: { photo: asset('assets/classroom_play.jpg') },
+  LKG: { photo: asset('assets/student_activities.jpg') },
+  UKG: { photo: asset('assets/campus_view.jpg') },
 }
 </script>
 
 <template>
-  <section id="batches" class="relative overflow-hidden bg-cream py-16 scroll-mt-16">
+  <section id="batches" class="relative overflow-hidden bg-surface-alt py-16 scroll-mt-16">
     <div
       class="pointer-events-none absolute inset-0"
       style="background: radial-gradient(44rem 30rem at 96% -10%, rgba(192, 130, 104, 0.10), transparent 62%)"
@@ -24,8 +25,13 @@ const cards = {
       </div>
 
       <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <article v-for="(p, i) in programs" :key="p.name" v-reveal:scale="i" class="group text-center">
-          <div class="relative overflow-hidden ring-1 ring-ink-100">
+        <article
+          v-for="(p, i) in programs"
+          :key="p.name"
+          v-reveal:scale="i"
+          class="group text-center bg-white border border-surface-line"
+        >
+          <div class="relative overflow-hidden">
             <img
               :src="cards[p.name].photo"
               :alt="`${p.name} at Karyonz School`"
@@ -39,14 +45,16 @@ const cards = {
             </span>
           </div>
 
-          <h3 class="display-heading text-ink-800 text-xl mt-5">{{ p.name }}</h3>
-          <p class="text-ink-400 text-sm mt-2 leading-relaxed">{{ p.description }}</p>
+          <div class="px-5 pb-6">
+            <h3 class="display-heading text-ink-800 text-xl mt-5">{{ p.name }}</h3>
+            <p class="text-ink-400 text-sm mt-2 leading-relaxed">{{ p.description }}</p>
+          </div>
         </article>
       </div>
 
       <div
         v-reveal
-        class="mt-10 border-t border-ink-100 pt-7 flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left"
+        class="mt-10 bg-white border border-surface-line p-7 flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left"
       >
         <span class="tile-icon w-16 shrink-0 bg-sun-200 text-3xl">🕐</span>
         <div>

@@ -33,7 +33,7 @@ onUnmounted(stop)
 </script>
 
 <template>
-  <section id="testimonials" class="relative overflow-hidden py-16 scroll-mt-16 bg-gradient-to-b from-white to-ink-50/70">
+  <section id="testimonials" class="relative overflow-hidden py-16 scroll-mt-16 bg-gradient-to-b from-surface-base to-surface-alt">
     <div
       v-reveal
       class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center"
