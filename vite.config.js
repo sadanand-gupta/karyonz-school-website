@@ -5,8 +5,7 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
-  // GitHub Pages serves a project site under /<repo-name>/, so every asset URL
-  // has to be prefixed with it. Change to '/' if this ever moves to a custom
-  // domain or to a host that serves from the root (Netlify, Vercel).
-  base: '/karyonz-school-website/',
+  // Vercel serves this at the domain root, so asset URLs must not be prefixed.
+  // A sub-path base here is what produced 404s on every asset and a blank page.
+  base: '/',
 })
