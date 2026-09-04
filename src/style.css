@@ -91,6 +91,17 @@
   }
 }
 
+/* The scroll-reveal directive parks elements 36px to the side until they enter
+   view, which on a narrow screen pushes them past the right edge and leaves the
+   page horizontally scrollable - a dead 20px gutter beside every section.
+   Clip that axis at the root.
+     Note: "clip", not "hidden". "hidden" would turn these into scroll
+     containers, which silently breaks position: sticky on the header. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--color-ink-900);
