@@ -16,6 +16,10 @@ export const school = {
   // Where the enquiry form actually sends. Kept separate from `email` so the
   // published address and the inbox that receives submissions can differ.
   enquiryEmail: 'sadanandguptat@gmail.com',
+  // WhatsApp needs the full international form with no '+' or spaces, so the
+  // 91 country code is prefixed to the 10-digit number. Used by both the
+  // floating chat button and the enquiry form's "Send via WhatsApp" option.
+  whatsappDigits: '918248362054',
   hours: 'Mon–Fri: 9:00 AM – 7:30 PM · Sat: 9:00 AM – 2:30 PM · Sun: 9:30 – 11:30 AM',
   // Destination used for the map embed and the "Get Directions" link.
   // Keep it short and unambiguous so Google resolves it to the right pin.

@@ -1,13 +1,14 @@
 <script setup>
-// wa.me needs the full international form, so the +91 country code is prefixed
-// to the 10-digit number.
-const phoneDigits = '918248362054'
+// The number lives in school.js (already in wa.me's international form) so the
+// floating button and the enquiry form's WhatsApp option never drift apart.
+import { school } from '../data/school.js'
+
 const message = encodeURIComponent("Hi! I'd like to know more about admissions at Karyonz School.")
 </script>
 
 <template>
   <a
-    :href="`https://wa.me/${phoneDigits}?text=${message}`"
+    :href="`https://wa.me/${school.whatsappDigits}?text=${message}`"
     target="_blank"
     rel="noopener"
     aria-label="Chat with us on WhatsApp"
