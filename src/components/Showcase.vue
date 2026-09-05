@@ -21,7 +21,7 @@ const items = [
   {
     icon: '⚽',
     tile: 'bg-coral-100 text-coral-600',
-    photo: asset('assets/gallery_extra_2.jpg'),
+    photo: asset('assets/student_activities.jpg'),
     title: 'Outdoor Play',
     text: 'Open-air play and movement in our campus play area — building coordination, confidence and teamwork.',
   },

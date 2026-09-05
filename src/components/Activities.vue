@@ -21,7 +21,16 @@ import { activities } from '../data/school.js'
           v-reveal:scale="i"
           class="text-center bg-white border border-surface-line py-6 px-3"
         >
-          <div class="tile-icon w-14 mx-auto text-2xl bg-surface-alt">{{ a.icon }}</div>
+          <!-- The art is full-colour, so it sits on the card directly rather
+               than in a tinted tile the way the emoji did. -->
+          <img
+            :src="a.art"
+            alt=""
+            loading="lazy"
+            width="128"
+            height="128"
+            class="w-16 h-16 mx-auto object-contain"
+          />
           <p class="display-heading text-ink-800 text-sm mt-3">{{ a.name }}</p>
         </div>
       </div>

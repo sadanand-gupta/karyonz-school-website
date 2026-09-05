@@ -5,11 +5,11 @@ import { gsap } from 'gsap'
 import { school } from '../data/school.js'
 import ActionButton from './ui/ActionButton.vue'
 
-// Two full-bleed campus photos that cross-fade behind the headline.
-// Both are landscape shots that still read well when cropped tall on a phone.
+// Full-bleed campus photos that cross-fade behind the headline. Landscape
+// shots that still read well when cropped tall on a phone. Add more entries
+// here and the crossfade plus the dot controls come back on their own.
 const heroSlides = [
   { src: asset('assets/gallery_extra_1.jpg'), alt: 'Karyonz School children during a classroom activity' },
-  { src: asset('assets/gallery_extra_2.jpg'), alt: 'Karyonz School children at play on the campus' },
 ]
 
 // Short, verifiable reassurances under the CTAs — the kind of thing a parent
@@ -21,6 +21,8 @@ let slideTimer = null
 
 function startAutoplay() {
   clearInterval(slideTimer)
+  // Nothing to cross-fade to with a single photo.
+  if (heroSlides.length < 2) return
   slideTimer = setInterval(() => {
     activeSlide.value = (activeSlide.value + 1) % heroSlides.length
   }, 6000)
@@ -139,7 +141,7 @@ onUnmounted(() => clearInterval(slideTimer))
     <div class="hero-controls absolute inset-x-0 bottom-6 sm:bottom-8">
       <div class="max-w-6xl mx-auto px-5 sm:px-6 flex items-center justify-between gap-4">
         <!-- Dots keep their small look but sit inside a 44px-tall touch target. -->
-        <div class="flex items-center -ml-2">
+        <div v-if="heroSlides.length > 1" class="flex items-center -ml-2">
           <button
             v-for="(slide, i) in heroSlides"
             :key="slide.src"
@@ -157,7 +159,7 @@ onUnmounted(() => clearInterval(slideTimer))
 
         <a
           href="#about"
-          class="hidden sm:inline-flex items-center gap-2 text-white/70 hover:text-white text-xs font-medium tracking-[0.18em] uppercase transition-colors"
+          class="hidden sm:inline-flex ml-auto items-center gap-2 text-white/70 hover:text-white text-xs font-medium tracking-[0.18em] uppercase transition-colors"
         >
           Scroll
           <svg class="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">

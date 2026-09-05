@@ -120,17 +120,23 @@ export const testimonials = [
 
 // Real enrichment activities offered alongside the core academic batches
 // (sourced from the school's own "Summer Splash" promotional flyer).
+//
+// `art` is an animated icon in public/assets/activities/. The source files are
+// 640x640, far larger than the ~56px tile they render into, so they are resized
+// to 128 (2x for retina) with gifsicle before being committed - at full size the
+// ten of them came to 14 MB.
 export const activities = [
-  { icon: '🧮', name: 'Abacus' },
-  { icon: '🎨', name: 'Drawing' },
-  { icon: '✍️', name: 'Handwriting' },
-  { icon: '🎹', name: 'Keyboard' },
-  { icon: '🎸', name: 'Guitar' },
-  { icon: '✂️', name: 'Art & Craft' },
-  { icon: '💃', name: 'Western Dance' },
-  { icon: '🥋', name: 'Karate' },
-  { icon: '🎵', name: 'Music' },
-  { icon: '🥍', name: 'Silambam' },
+  { art: asset('assets/activities/abacus.gif'), name: 'Abacus' },
+  { art: asset('assets/activities/painting.gif'), name: 'Drawing' },
+  { art: asset('assets/activities/writing.gif'), name: 'Handwriting' },
+  { art: asset('assets/activities/keyboard.gif'), name: 'Keyboard' },
+  { art: asset('assets/activities/classic-guitar.gif'), name: 'Guitar' },
+  { art: asset('assets/activities/wind-mill.gif'), name: 'Art & Craft' },
+  { art: asset('assets/activities/ballet.gif'), name: 'Western Dance' },
+  { art: asset('assets/activities/kick-boxing.gif'), name: 'Karate' },
+  { art: asset('assets/activities/microphone-in-hand.gif'), name: 'Music' },
+  // The only still one in the set; nothing to animate.
+  { art: asset('assets/activities/silambam.png'), name: 'Silambam' },
 ]
 
 // Headline stats. Only verified figures are listed here — `value` is the
@@ -151,7 +157,6 @@ export const gallery = [
   { src: asset('assets/student_activities.jpg'), alt: 'Children doing fine motor skill activities', label: 'Student Activities' },
   { src: asset('assets/learning_moments.jpg'), alt: 'A student engaged in a learning activity', label: 'Learning Moments' },
   { src: asset('assets/gallery_extra_1.jpg'), alt: 'Students with craft planters outside the school', label: 'Craft Activity' },
-  { src: asset('assets/gallery_extra_2.jpg'), alt: 'Students at the school playground', label: 'Playground Fun' },
 ]
 
 // Facebook reels and videos from the school's own page, embedded through
