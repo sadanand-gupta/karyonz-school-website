@@ -13,9 +13,27 @@ import ShineBorder from './ui/ShineBorder.vue'
 // cost the page hundreds of KB and a pile of Facebook cookies on first paint.
 const playing = ref(null)
 
-const INITIAL = 8
+// A phone column is one tile wide, so three stacked posters push everything
+// below the fold — mobile leads with a single video and offers the rest.
+// Desktop fits the whole row, so it opens with all three.
+//
+// The one mobile leads with is picked by index rather than taken off the front:
+// the middle clip is the strongest opener. Expanding still shows all three in
+// their authored order.
+const MOBILE_FEATURED = 1
+
+// `md` is where the grid goes from two columns to three — see the columns-*
+// classes on the tile list.
+const isDesktop = ref(true)
+let mq
+
 const showAll = ref(false)
-const visible = computed(() => (showAll.value ? videos : videos.slice(0, INITIAL)))
+const visible = computed(() => {
+  if (showAll.value || isDesktop.value) return videos
+  const featured = videos[MOBILE_FEATURED] ?? videos[0]
+  return featured ? [featured] : []
+})
+const hidden = computed(() => videos.length - visible.value.length)
 
 // Each shape's aspect class and its height multiplier, kept together so a tile
 // and the iframe inside it can never disagree about the box they want.
@@ -60,11 +78,19 @@ function onKey(e) {
   if (e.key === 'Escape') stop()
 }
 
+function onBreakpoint(e) {
+  isDesktop.value = e.matches
+}
+
 onMounted(() => {
+  mq = window.matchMedia('(min-width: 48rem)')
+  isDesktop.value = mq.matches
+  mq.addEventListener('change', onBreakpoint)
   window.addEventListener('resize', onResize)
   window.addEventListener('keydown', onKey)
 })
 onUnmounted(() => {
+  mq?.removeEventListener('change', onBreakpoint)
   window.removeEventListener('resize', onResize)
   window.removeEventListener('keydown', onKey)
   clearTimeout(resizeTimer)
@@ -102,11 +128,11 @@ const embedSrc = computed(() => {
 
       <!-- Multi-column packs the mixed portrait/landscape tiles without the
            ragged gaps a fixed grid would leave. -->
-      <div class="mt-10 columns-2 md:columns-3 lg:columns-4 gap-4">
+      <div class="mt-10 columns-1 sm:columns-2 md:columns-3 gap-4">
         <BlurFade
           v-for="(v, i) in visible"
           :key="v.id"
-          :delay="(i % 8) * 0.05"
+          :delay="i * 0.05"
           class="mb-4 break-inside-avoid"
         >
           <!-- The outline is a real frame, not a border on the poster: a padded
@@ -204,13 +230,13 @@ const embedSrc = computed(() => {
         </BlurFade>
       </div>
 
-      <div v-if="!showAll && videos.length > INITIAL" class="mt-8 text-center">
+      <div v-if="!showAll && hidden > 0" class="mt-8 text-center">
         <button
           type="button"
           class="text-ink-800 font-semibold border-b-2 border-ink-300 hover:border-coral-500 pb-1 transition-colors"
           @click="showAll = true"
         >
-          Show all {{ videos.length }} videos
+          See {{ hidden }} more {{ hidden === 1 ? 'video' : 'videos' }}
         </button>
       </div>
 
